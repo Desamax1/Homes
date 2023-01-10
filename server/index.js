@@ -1,17 +1,22 @@
 import mongoose from "mongoose";
 import cors from "cors";
 import express from "express";
+import options from "./config.json" assert { type: "json" };
+
+import UserRouter from "./src/routes/User.router.js";
 
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: options.frontendUri
 }));
+app.use(express.json());
 
+app.use("/user", UserRouter);
 
-mongoose.connect(process.env.CONN_STRING, () => {
-    console.log(`Connection to MongoDB at ${process.env.CONN_STRING} has been opened successfully`);
+mongoose.connect(options.connectionString, () => {
+    console.log(`Connection to MongoDB has been opened successfully`);
 });
-app.listen(process.env.PORT, () => {
-    console.log(`Server listening on http://localhost:${process.env.PORT}/`);
+app.listen(options.port, () => {
+    console.log(`Server listening on http://localhost:${options.port}/`);
 });
