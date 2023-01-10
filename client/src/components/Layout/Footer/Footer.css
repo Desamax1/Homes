@@ -1,0 +1,26 @@
+footer {
+    width: 100vw;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    font-size: 1.2rem;
+}
+
+footer .line {
+    width: 2px;
+    background-color: black;
+}
+
+footer .col {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1vw;
+}
+
+footer .col h3 {
+    text-align: center;
+}
+
+footer .col p {
+    text-align: justify;
+}
