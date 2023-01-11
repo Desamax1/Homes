@@ -2,5 +2,6 @@
     "port": "8080",
     "connectionString": "Your connection string goes here!",
     "frontendUri": "Your frontend origin (domain) goes here",
-    "pepper": "Super secret pepper used to secure passwords!"
+    "pepper": "Super secret pepper used to secure passwords!",
+    "jwtSecret": "Super secret phrase for securing your JWT"
 }

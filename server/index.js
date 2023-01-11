@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import express from "express";
 import options from "./config.json" assert { type: "json" };
+import cookieParser from "cookie-parser";
 
 import UserRouter from "./src/routes/User.router.js";
 
@@ -11,6 +12,7 @@ app.use(cors({
     origin: options.frontendUri
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/user", UserRouter);
 

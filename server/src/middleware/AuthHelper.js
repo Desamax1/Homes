@@ -1,8 +1,16 @@
-// middleware that will check if the user is authorized
-// for now it just runs the next function
+import { VerifyJWT } from "../utils/JWTHelper.js";
+
 const authUser = async (req, res, next) => {
+    const token = VerifyJWT(req.cookies.token);
+
+    if (!token) {
+        res.status(401).json({
+            message: "You have to be logged in to do that!"
+        });
+    }
+
     res.locals.user = {
-        id: req.body.id
+        id: token.id
     };
     next();
 }

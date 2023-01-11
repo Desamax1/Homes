@@ -1,11 +1,16 @@
 import Users from "../models/User.model.js";
+import { SignJWT } from "../utils/JWTHelper.js";
 import { HashChecker, HashGenerator } from "../utils/PasswordHelper.js";
 
 const getUser = async (req, res) => {
     try {
-        const user = await Users.findOne({
-            name: req.params.id
-        });
+        if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+            return res.status(400).json({
+                message: "Invalid user id!"
+            });
+        }
+
+        const user = await Users.findById(req.params.id, '-hash -salt -_id -__v -email -phoneNumber');
 
         if (!user) {
             return res.status(404).json({
@@ -86,7 +91,13 @@ const loginUser = async (req, res) => {
 
         if (HashChecker(password, hash, salt)) {
             // password ok
-            // TODO: Set cookie
+            res.cookie("token", SignJWT(user.id), {
+                httpOnly: true
+            });
+
+            await Users.findByIdAndUpdate(user.id, {
+                lastSeen: Date.now()
+            });
             return res.status(200).json({
                 message: "User logged in"
             });
@@ -148,7 +159,7 @@ const removeUser = async (req, res) => {
     try {
         await Users.findByIdAndDelete(res.locals.user.id);
 
-        // TODO: log user out after account deletion
+        res.clearCookie("token");
 
         return res.status(200).json({
             message: "User deleted successfully"
@@ -161,3 +172,19 @@ const removeUser = async (req, res) => {
     }
 }
 export const RemoveUser = removeUser;
+
+const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        
+        return res.status(200).json({
+            message: "User logged out successfully"
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "An unexpected error has occured!"
+        });
+    }
+}
+export const LogoutUser = logoutUser;
