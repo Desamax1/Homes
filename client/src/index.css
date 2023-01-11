@@ -5,13 +5,21 @@
 }
 
 :root {
-  --primary: black;
-  --background: white;
+  --primary: #2E2F2F;
+  --accent: #0582CA;
+  --background: #DBDBDB;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: calc(3vmin + 4px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--primary);
+}
+
+button {
+  font: inherit;
 }

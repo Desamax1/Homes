@@ -1,30 +1,38 @@
 nav {
     position: sticky;
     top: 0;
-}
-
-nav ul {
-    width: 100%;
     display: flex;
+    background-color: var(--primary);
+    color: var(--background);
+    align-items: center;
     justify-content: space-evenly;
-    padding: 0 10vw;
+    padding: 1vh 0;
+    font-size: 1.2rem;
 }
 
-nav ul li {
-    list-style-type: none;
-    padding: 0.5rem;
+nav section {
+    display: flex;
 }
 
-.link {
+nav:nth-child(1) * {
+    margin: 0 2vw;
+}
+
+nav .link {
+    color: var(--background);
     text-decoration: none;
     text-transform: uppercase;
-    color: black;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    transition: ease 140ms;
+    transition: ease 100ms;
 }
 
-.link:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+nav .link:hover {
+    color: var(--accent);
+}
+
+nav .account-area .link {
+    display: flex;
+    align-items: center;
+}
+nav .logo {
+    height: 60px;
 }
