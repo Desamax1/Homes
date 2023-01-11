@@ -14,7 +14,9 @@ app.use(express.json());
 
 app.use("/user", UserRouter);
 
-mongoose.connect(options.connectionString, () => {
+mongoose.connect(options.connectionString, {
+    useNewUrlParser: true
+}, () => {
     console.log(`Connection to MongoDB has been opened successfully`);
 });
 app.listen(options.port, () => {
