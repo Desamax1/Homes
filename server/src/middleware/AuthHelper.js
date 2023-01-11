@@ -4,7 +4,7 @@ const authUser = async (req, res, next) => {
     const token = VerifyJWT(req.cookies.token);
 
     if (!token) {
-        res.status(401).json({
+        return res.status(401).json({
             message: "You have to be logged in to do that!"
         });
     }

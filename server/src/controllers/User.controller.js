@@ -43,8 +43,6 @@ const addUser = async (req, res) => {
         const user = await Users.create({
             username,
             email,
-            createdAt: Date.now(),
-            lastSeen: Date.now(),
             phoneNumber,
             hash,
             salt,
@@ -55,7 +53,7 @@ const addUser = async (req, res) => {
             throw "Error during user creation!";
         }
 
-        return res.status(200).json({
+        return res.status(201).json({
             message: "User successfully created",
             id: user.id
         });

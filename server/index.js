@@ -5,6 +5,7 @@ import options from "./config.json" assert { type: "json" };
 import cookieParser from "cookie-parser";
 
 import UserRouter from "./src/routes/User.router.js";
+import ListingRouter from "./src/routes/Listing.router.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/user", UserRouter);
+app.use("/listing", ListingRouter);
 
 mongoose.connect(options.connectionString, {
     useNewUrlParser: true

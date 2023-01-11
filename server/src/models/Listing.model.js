@@ -1,20 +1,47 @@
 import { model, Schema } from "mongoose";
 
 const listingSchema = new Schema({
-    price: Number,
-    isAuction: Boolean,
+    price: {
+        type: Number,
+        required: true
+    },
+    isAuction: {
+        type: Boolean,
+        default: false
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     description: String,
-    address: String,
-    isPremium: Boolean,
-    category: String,
-    area: Number,
-    createdAt: Number,
-    hasExpired: Boolean
+    address: {
+        type: String,
+        required: true
+    },
+    isPremium: {
+        type: Boolean,
+        default: false
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    area: {
+        type: Number,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
+    hasExpired: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const Listings = model("Listing", listingSchema);
