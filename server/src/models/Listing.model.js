@@ -38,6 +38,10 @@ const listingSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    lastChanged: {
+        type: Date,
+        default: Date.now()
+    },
     hasExpired: {
         type: Boolean,
         default: false

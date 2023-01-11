@@ -18,11 +18,16 @@ app.use(cookieParser());
 app.use("/user", UserRouter);
 app.use("/listing", ListingRouter);
 
-mongoose.connect(options.connectionString, {
-    useNewUrlParser: true
-}, () => {
+(async function(){
+    console.log("\n\nBacked is starting...\n");
+
+    await mongoose.connect(options.connectionString, {
+        useNewUrlParser: true
+    });
     console.log(`Connection to MongoDB has been opened successfully`);
-});
-app.listen(options.port, () => {
+
+    await app.listen(options.port);
     console.log(`Server listening on http://localhost:${options.port}/`);
-});
+
+    console.log("\nBackend is up and running!");
+})()
