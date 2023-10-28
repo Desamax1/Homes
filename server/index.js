@@ -31,3 +31,5 @@ app.use("/listing", ListingRouter);
 
     console.log("\nBackend is up and running!");
 })()
+
+console.log("tralalla");
